@@ -222,7 +222,7 @@ Promise
 
 </details>
 
-### getAllRecordsByCursor(app, query, fields, totalCount)
+### getAllRecordsByCursor(app, query, fields)
 
 >* Retrieves details of all records from an app using a query string.
 >* Can't indicate limit and offset of query.
@@ -235,7 +235,6 @@ Promise
 | app | Integer | yes | The kintone app ID
 | query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
 | fields | Array<String\> | (optional) | List of field codes you want in the response.
-| size | Integer | (optional) | Number of records to retrieve per request. <br> Default: 100. <br> Maximum: 500.
 
 **Return**
 
@@ -256,8 +255,7 @@ Promise
       '{your_field_code}',
       // another fieldCode
   ]
-  var size = {your_decide_true_or_false};
-  kintoneRecord.getAllRecordsByCursor(app, query, fields, size).then((rsp) => {
+  kintoneRecord.getAllRecordsByCursor(app, query, fields).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
@@ -276,8 +274,7 @@ Promise
       '{your_field_code}',
       // another fieldCode
   ]
-  const size = {your_size};
-  kintoneRecord.getAllRecordsByCursor(app, query, fields, size).then((rsp) => {
+  kintoneRecord.getAllRecordsByCursor(app, query, fields).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
