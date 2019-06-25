@@ -222,6 +222,72 @@ Promise
 
 </details>
 
+### getAllRecordsByCursor(app, query, fields, totalCount)
+
+>* Retrieves details of all records from an app using a query string.
+>* Can't indicate limit and offset of query.
+>* Number of records can be retrieved at once is greater than the default limitations
+
+**Parameter**
+
+| Name| Type| Required| Description |
+| --- | --- | --- | --- |
+| app | Integer | yes | The kintone app ID
+| query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| fields | Array<String\> | (optional) | List of field codes you want in the response.
+| size | Integer | (optional) | Number of records to retrieve per request. <br> Default: 100. <br> Maximum: 500.
+
+**Return**
+
+Promise
+
+**Sample code**
+
+<details class="tab-container" open>
+<Summary>Get all records by cursor</Summary>
+
+<strong class="tab-name">Javascript</strong>
+
+<pre class="inline-code">
+
+  var app = {your_app_id};
+  var query = '{your_query_string}';
+  var fields = [
+      '{your_field_code}',
+      // another fieldCode
+  ]
+  var size = {your_decide_true_or_false};
+  kintoneRecord.getAllRecordsByCursor(app, query, fields, size).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err.get());
+  });
+
+</pre>
+
+<strong class="tab-name">Nodejs</strong>
+
+<pre class="inline-code">
+
+  const app = {your_app_id};
+  const query = '{your_query_string}';
+  const fields = [
+      '{your_field_code}',
+      // another fieldCode
+  ]
+  const size = {your_size};
+  kintoneRecord.getAllRecordsByCursor(app, query, fields, size).then((rsp) => {
+    console.log(rsp);
+  }).catch((err) => {
+    // This SDK return err with KintoneAPIException
+    console.log(err.get());
+  });
+
+</pre>
+
+</details>
+
 ### addRecord(app, record)
 
 >Add one record to an app.
