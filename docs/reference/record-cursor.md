@@ -59,7 +59,7 @@ Currently there's only cursor for records.
 
 ## Methods
 
-### createCursor(app, fields, query, size)
+### createCursor(option)
 
 > Create a cursor.
 
@@ -67,10 +67,11 @@ Currently there's only cursor for records.
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| fields | Array<String\> | (optional) | List of field codes you want in the response.
-| query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
-| size | Integer | (optional) | Number of records to retrieve per request. <br> Default: 100. <br>Maximum: 500.
+| option | Object | yes | Cursor option
+| option.app | Integer | yes | The kintone app ID
+| option.fields | Array<String\> | (optional) | List of field codes you want in the response.
+| option.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| option.size | Integer | (optional) | Number of records to retrieve per request. <br> Default: 100. <br>Maximum: 500.
 
 **Return**
 
@@ -100,8 +101,20 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
         
         // Init RecordCursor module
         const kintoneRC = new kintoneRecordCursorModule(conn)
+
+        const rcOption = {
+            app: appID,
+            fields: [],
+            query: '',
+            size: 2
+        }
             
-        //...
+        kintoneRC.createCursor(rcOption)
+            .then(function(creatCursorResponse){
+                myCursor = creatCursorResponse;
+                console.log('Cursor ID: ' + myCursor.id );
+                console.log('Total Count: ' + myCursor.totalCount );
+            })
     }(window.kintoneJSSDK));
 
 </pre>
@@ -121,6 +134,20 @@ Promise&lt;CreateCursorResponse&gt; Cursor Object from kintone.
     const kintoneConn = new kintone.Connection(domain, kintoneAuth);
     
     const kintoneRC = new kintone.RecordCursor(kintoneConn);
+
+    const rcOption = {
+        app: appID,
+        fields: [],
+        query: '',
+        size: 2
+    }
+
+    kintoneRC.createCursor(rcOption)
+        .then(function(creatCursorResponse){
+            myCursor = creatCursorResponse;
+            console.log('Cursor ID: ' + myCursor.id );
+            console.log('Total Count: ' + myCursor.totalCount );
+        })
 
 </pre>
 

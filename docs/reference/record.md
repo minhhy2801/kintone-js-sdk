@@ -222,7 +222,7 @@ Promise
 
 </details>
 
-### getAllRecordsByCursor(app, query, fields)
+### getAllRecordsByCursor(option)
 
 >* Retrieves details of all records from an app using a query string.
 >* Can't indicate limit and offset of query.
@@ -232,9 +232,10 @@ Promise
 
 | Name| Type| Required| Description |
 | --- | --- | --- | --- |
-| app | Integer | yes | The kintone app ID
-| query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
-| fields | Array<String\> | (optional) | List of field codes you want in the response.
+| option | Object | yes | Option to create cursor
+| option.app | Integer | yes | The kintone app ID
+| option.query | String | (optional) | [The query string](https://developer.kintone.io/hc/en-us/articles/213149287#getrecords) that will specify what records will be responded.
+| option.fields | Array<String\> | (optional) | List of field codes you want in the response.
 
 **Return**
 
@@ -248,14 +249,16 @@ Promise
 <strong class="tab-name">Javascript</strong>
 
 <pre class="inline-code">
-
-  var app = {your_app_id};
-  var query = '{your_query_string}';
-  var fields = [
+  var rcOption = {
+    app: {your_app_id},
+    fields: [
       '{your_field_code}',
       // another fieldCode
-  ]
-  kintoneRecord.getAllRecordsByCursor(app, query, fields).then((rsp) => {
+    ],
+    query: '{your_query_string}'
+  };
+  
+  kintoneRecord.getAllRecordsByCursor(rcOption).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
@@ -268,13 +271,16 @@ Promise
 
 <pre class="inline-code">
 
-  const app = {your_app_id};
-  const query = '{your_query_string}';
-  const fields = [
+  const rcOption = {
+    app: {your_app_id},
+    fields: [
       '{your_field_code}',
       // another fieldCode
-  ]
-  kintoneRecord.getAllRecordsByCursor(app, query, fields).then((rsp) => {
+    ],
+    query: '{your_query_string}'
+  };
+  
+  kintoneRecord.getAllRecordsByCursor(rcOption).then((rsp) => {
     console.log(rsp);
   }).catch((err) => {
     // This SDK return err with KintoneAPIException
