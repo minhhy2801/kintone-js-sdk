@@ -21,7 +21,7 @@ class Connection extends BaseConnection {
      * @param {Number} params.guestSpaceID
      */
 
-  constructor({domain, auth, guestSpaceID}) {
+  constructor({domain, auth, guestSpaceID} = {}) {
     super({domain, auth, guestSpaceID});
     this.setClientCert();
   }
